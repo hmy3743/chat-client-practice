@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menuItemFriend"
+        android:icon="@drawable/ic_person_outline_black_24dp"
+        android:title="friend"/>
+    <item
+        android:id="@+id/menuItemChatting"
+        android:icon="@drawable/ic_chat_bubble_outline_black_24dp"
+        android:title="chatting"/>
+</menu>
