@@ -18,7 +18,7 @@ class RecyclerViewAdapterChatRoom(private val activity: Activity, private val li
     inner class ViewHolder(parent: ViewGroup): RecyclerView.ViewHolder(
         LayoutInflater.from(parent.context).inflate(R.layout.item_recyclerviewchatroom, parent, false)
     ) {
-        fun bind(image: File?, title: String, lastContent: String, participantCount: Int) {
+        fun bind(image: File?, roomId: String, title: String, lastContent: String, participantCount: Int) {
             if(image != null && image.exists()) {
                 Glide.with(itemView.imageView).load(image).into(itemView.imageView)
             }
@@ -28,6 +28,8 @@ class RecyclerViewAdapterChatRoom(private val activity: Activity, private val li
 
             itemView.setOnClickListener {
                 val intent = Intent(activity, ChattingActivity::class.java)
+                intent.putExtra(ChattingActivity.EXTRA_KEY_ROOM_ID, roomId)
+                activity.startActivity(intent)
             }
         }
     }
@@ -56,6 +58,6 @@ class RecyclerViewAdapterChatRoom(private val activity: Activity, private val li
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(null, chatRooms[position].name, "lastContent", 2)
+        holder.bind(null, chatRooms[position].roomId, chatRooms[position].name, "lastContent", 2)
     }
 }

@@ -1,5 +1,6 @@
 package com.myhan.chat_client_practice.view
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -33,7 +34,7 @@ class FragmentChatting : Fragment() {
         binding.vm = viewModel
         binding.recyclerViewChatRoom.layoutManager = LinearLayoutManager(context)
         binding.recyclerViewChatRoom.adapter =
-            RecyclerViewAdapterChatRoom(this, viewModel)
+            RecyclerViewAdapterChatRoom(activity as Activity, this, viewModel)
         return binding.root
     }
 

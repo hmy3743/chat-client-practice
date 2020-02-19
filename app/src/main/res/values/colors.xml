@@ -4,4 +4,9 @@
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#EEEEEE</color>
     <color name="profileBackground">#AED6F1</color>
+    <color name="fromMe">#F7DC6F</color>
+    <color name="fromOther">#FFFFFF</color>
+    <color name="chattingBackground">#D1F2EB</color>
+    <color name="sendButtonBackground">#AED6F1</color>
+    <color name="cardBackground">#FADBD8</color>
 </resources>

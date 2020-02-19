@@ -1,31 +1,30 @@
 package com.myhan.chat_client_practice
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.myhan.chat_client_practice.model.ChatMessage
 import com.myhan.chat_client_practice.model.ChatRoom
 import com.myhan.chat_client_practice.model.User
+import io.reactivex.BackpressureStrategy
+import io.reactivex.Emitter
 import io.reactivex.Flowable
 
 class RepositoryImpl: Repository {
-    val sampleLiveChatRoom: MutableLiveData<List<ChatRoom>> = MutableLiveData(listOf(
-        ChatRoom("sampleroomid1", "한 만영"),
+    val sampleChatRooms: List<ChatRoom> = listOf(
         ChatRoom("sampleroomid2", "스프링 스터디"),
         ChatRoom("sampleroomid3", "소식 공유방"),
-        ChatRoom("sampleroomid4", "황 성호"),
-        ChatRoom("sampleroomid5", "한 만영"),
         ChatRoom("sampleroomid6", "스프링 스터디"),
         ChatRoom("sampleroomid7", "소식 공유방"),
-        ChatRoom("sampleroomid8", "황 성호"),
-        ChatRoom("sampleroomid9", "한 만영"),
         ChatRoom("sampleroomid10", "스프링 스터디"),
         ChatRoom("sampleroomid11", "소식 공유방"),
-        ChatRoom("sampleroomid12", "황 성호"),
-        ChatRoom("sampleroomid13", "한 만영"),
         ChatRoom("sampleroomid14", "스프링 스터디"),
         ChatRoom("sampleroomid15", "소식 공유방"),
-        ChatRoom("sampleroomid16", "황 성호")
-    ))
-    val sampleFlowableChatRoom: Flowable<List<ChatRoom>> = Flowable.just(listOf(
+        ChatRoom("sampleroomid16", "빠른 만남방")
+    )
+
+    val sampleLiveChatRooms: MutableLiveData<List<ChatRoom>> = MutableLiveData(sampleChatRooms)
+    val sampleFlowableChatRooms: Flowable<List<ChatRoom>> = Flowable.just(listOf(
         ChatRoom("sampleroomid1", "한 만영"),
         ChatRoom("sampleroomid2", "스프링 스터디"),
         ChatRoom("sampleroomid3", "소식 공유방"),
@@ -69,8 +68,17 @@ class RepositoryImpl: Repository {
         User("samplemyid", "마틸다", "사는게 항상 이렇게 힘든 건가요? 아니면 어릴 때만 그런 건가요?")
     )
 
+    val sampleMessages = listOf<ChatMessage>(
+        ChatMessage(ChatMessage.MessageType.TALK, "sampleroomid", "samplemyid", "하쿠나 마타타"),
+        ChatMessage(ChatMessage.MessageType.TALK, "sampleroomid", "sampleotherid", "정말 멋진 말이지"),
+        ChatMessage(ChatMessage.MessageType.TALK, "sampleroomid", "samplemyid", "하쿠나 마타타"),
+        ChatMessage(ChatMessage.MessageType.TALK, "sampleroomid", "sampleotherid", "끝내주는 말"),
+        ChatMessage(ChatMessage.MessageType.TALK, "sampleroomid", "samplemyid", "근심과 걱정 모두 떨처버려")
+    )
+    val sampleLiveMessages = MutableLiveData<List<ChatMessage>>(sampleMessages)
+    
     override fun chatRooms(): LiveData<List<ChatRoom>> {
-        return sampleLiveChatRoom
+        return sampleLiveChatRooms
     }
 
     override fun users(): LiveData<List<User>> {
@@ -78,4 +86,16 @@ class RepositoryImpl: Repository {
     }
 
     override fun me(): Flowable<User> = sampleMyProfile
+    override fun chatRoom(roomId: String): Flowable<ChatRoom> {
+        val sampleFlowableChatRoom: Flowable<ChatRoom> = Flowable.create({
+            for (chatroom in sampleChatRooms) {
+                if(chatroom.roomId == roomId) {
+                    it.onNext(chatroom)
+                }
+            }
+        }, BackpressureStrategy.LATEST)
+        return sampleFlowableChatRoom
+    }
+
+    override fun messages(roomId: String): LiveData<List<ChatMessage>> = sampleLiveMessages
 }

@@ -6,6 +6,9 @@
         <variable
             name="vm"
             type="com.myhan.chat_client_practice.FragmentFriendViewModel" />
+        <variable
+            name="fragment"
+            type="com.myhan.chat_client_practice.view.FragmentFriend" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -35,30 +38,33 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/buttonSearch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
+                android:background="@android:color/transparent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/buttonCreate"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_search_black_24dp" />
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/buttonCreate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
+                android:background="@android:color/transparent"
                 app:layout_constraintEnd_toStartOf="@+id/buttonSetting"
                 app:layout_constraintTop_toTopOf="@+id/buttonSearch"
                 app:srcCompat="@drawable/ic_add_black_24dp" />
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/buttonSetting"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
+                android:background="@android:color/transparent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/buttonSearch"
                 app:srcCompat="@drawable/ic_settings_black_24dp" />
@@ -70,7 +76,7 @@
             android:layout_height="64dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:background="@drawable/chatroom_background"
+            android:background="@drawable/chatroom_image_background"
             android:contentDescription="TODO"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout3"
@@ -103,23 +109,52 @@
             app:layout_constraintStart_toStartOf="@+id/textViewName" />
 
         <View
+            android:id="@+id/view"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"
             android:layout_marginEnd="20dp"
             android:background="#80AAAAAA"
-            app:layout_constraintBottom_toTopOf="@+id/recyclerViewFriend"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewFriend"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayoutCard"
+            android:layout_width="256dp"
+            android:layout_height="128dp"
+            android:background="@color/cardBackground"
+            app:layout_constraintBottom_toTopOf="@id/imageButtonSendCard"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view"
+            app:layout_constraintVertical_chainStyle="packed">
+
+            <EditText
+                android:id="@+id/editTextCardContent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageButton
+            android:id="@+id/imageButtonSendCard"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/send_button_background"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/constraintLayoutCard"
+            app:layout_constraintStart_toStartOf="@+id/constraintLayoutCard"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayoutCard"
+            app:srcCompat="@drawable/ic_send_skyblue_24dp"
+            android:onClick="@{ () -> fragment.startCardSendAnimation() }" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
