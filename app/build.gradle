@@ -17,6 +17,7 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
+        multiDexEnabled = true
     }
     buildTypes {
         release {
@@ -64,4 +65,16 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-livedata:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-reactivestreams:$lifecycle_version"
+
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+    implementation "androidx.room:room-ktx:$room_version"
+    implementation "androidx.room:room-rxjava2:$room_version"
+
+    implementation 'com.tinder.scarlet:scarlet:0.1.10'
+    implementation 'com.tinder.scarlet:websocket-okhttp:0.1.10'
+    implementation 'com.tinder.scarlet:stream-adapter-rxjava2:0.1.10'
+    implementation 'com.tinder.scarlet:message-adapter-moshi:0.1.10'
+
+    implementation 'com.android.support:multidex:1.0.3'
 }

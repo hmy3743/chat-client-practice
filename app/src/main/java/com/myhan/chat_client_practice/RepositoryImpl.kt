@@ -1,13 +1,11 @@
 package com.myhan.chat_client_practice
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.myhan.chat_client_practice.model.ChatMessage
 import com.myhan.chat_client_practice.model.ChatRoom
 import com.myhan.chat_client_practice.model.User
 import io.reactivex.BackpressureStrategy
-import io.reactivex.Emitter
 import io.reactivex.Flowable
 
 class RepositoryImpl: Repository {
@@ -69,11 +67,11 @@ class RepositoryImpl: Repository {
     )
 
     val sampleMessages = listOf<ChatMessage>(
-        ChatMessage(ChatMessage.MessageType.TALK, "sampleroomid", "samplemyid", "하쿠나 마타타"),
-        ChatMessage(ChatMessage.MessageType.TALK, "sampleroomid", "sampleotherid", "정말 멋진 말이지"),
-        ChatMessage(ChatMessage.MessageType.TALK, "sampleroomid", "samplemyid", "하쿠나 마타타"),
-        ChatMessage(ChatMessage.MessageType.TALK, "sampleroomid", "sampleotherid", "끝내주는 말"),
-        ChatMessage(ChatMessage.MessageType.TALK, "sampleroomid", "samplemyid", "근심과 걱정 모두 떨처버려")
+        ChatMessage(ChatMessage.MessageType.SEND, "sampleroomid", "samplemyid", "하쿠나 마타타"),
+        ChatMessage(ChatMessage.MessageType.SEND, "sampleroomid", "sampleotherid", "정말 멋진 말이지"),
+        ChatMessage(ChatMessage.MessageType.SEND, "sampleroomid", "samplemyid", "하쿠나 마타타"),
+        ChatMessage(ChatMessage.MessageType.SEND, "sampleroomid", "sampleotherid", "끝내주는 말"),
+        ChatMessage(ChatMessage.MessageType.SEND, "sampleroomid", "samplemyid", "근심과 걱정 모두 떨처버려")
     )
     val sampleLiveMessages = MutableLiveData<List<ChatMessage>>(sampleMessages)
     

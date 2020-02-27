@@ -1,20 +1,17 @@
 package com.myhan.chat_client_practice.view
 
+import android.animation.Animator
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AlphaAnimation
-import android.view.animation.AnimationSet
-import android.view.animation.TranslateAnimation
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.myhan.chat_client_practice.FragmentFriendViewModel
 import com.myhan.chat_client_practice.R
 import com.myhan.chat_client_practice.databinding.FragmentFriendBinding
-import kotlinx.android.synthetic.main.activity_chatting.*
 import kotlinx.android.synthetic.main.fragment_friend.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -42,24 +39,41 @@ class FragmentFriend : Fragment() {
         return binding.root
     }
 
-    fun startCardSendAnimation() {
+    fun onCardSend() {
         val animSet = AnimatorSet()
 
         val disappearTranslation = ObjectAnimator
-            .ofFloat(constraintLayoutCard, View.TRANSLATION_Y, 0f, -100f)
+            .ofFloat(constraintLayoutCard, View.TRANSLATION_Y, 0f, -10f)
             .setDuration(500)
 
         val disappearAlpha = ObjectAnimator
             .ofFloat(constraintLayoutCard, View.ALPHA, 1f, 0f)
             .setDuration(500)
 
-        val disappear = AnimatorSet().apply{ playTogether(disappearTranslation, disappearAlpha) }
+        val disappear = AnimatorSet().apply{
+            playTogether(disappearTranslation, disappearAlpha)
+            addListener(object: Animator.AnimatorListener {
+                override fun onAnimationRepeat(animation: Animator?) {}
+
+                override fun onAnimationEnd(animation: Animator?) {
+                    editTextCardContent.text.clear()
+                }
+
+                override fun onAnimationCancel(animation: Animator?) {}
+
+                override fun onAnimationStart(animation: Animator?) {}
+            })
+        }
+
+        val appearTranslation = ObjectAnimator
+            .ofFloat(constraintLayoutCard, View.TRANSLATION_Y, 0f, 0f)
+            .setDuration(0)
 
         val appearAlpha = ObjectAnimator
             .ofFloat(constraintLayoutCard, View.ALPHA, 0f, 1f)
             .setDuration(500)
 
-        val appear = AnimatorSet().apply{ playTogether(appearAlpha) }
+        val appear = AnimatorSet().apply{ playTogether(appearTranslation, appearAlpha) }
 
         animSet.playSequentially(disappear, appear)
         animSet.start()

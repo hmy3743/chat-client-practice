@@ -4,9 +4,9 @@ data class ChatMessage(
     val type: MessageType,
     val roomId: String,
     val sender: String,
-    val message: String
+    val content: String
 ) {
     enum class MessageType {
-        JOIN, TALK
+        JOIN, SEND, LEAVE, BROADCAST
     }
 }

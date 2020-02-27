@@ -7,6 +7,7 @@ buildscript {
     ext.rxjava_version = '2.2.17'
     ext.rxandroid_version = '2.1.1'
     ext.lifecycle_version = "2.1.0"
+    ext.room_version = "2.2.2"
     repositories {
         google()
         jcenter()

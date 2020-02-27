@@ -8,5 +8,5 @@
     <color name="fromOther">#FFFFFF</color>
     <color name="chattingBackground">#D1F2EB</color>
     <color name="sendButtonBackground">#AED6F1</color>
-    <color name="cardBackground">#FADBD8</color>
+    <color name="cardBackground">#C0392B</color>
 </resources>

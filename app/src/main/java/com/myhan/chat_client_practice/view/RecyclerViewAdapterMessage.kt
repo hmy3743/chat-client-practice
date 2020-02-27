@@ -16,7 +16,7 @@ class RecyclerViewAdapterMessage(private val lifecycleOwner: LifecycleOwner, pri
         LayoutInflater.from(parent.context).inflate(RecyclerViewAdapterMessage.VIEWS[viewType], parent, false)
     ) {
         fun bind(message: ChatMessage) {
-            itemView.bubbleTextViewMessageContent.text = message.message
+            itemView.bubbleTextViewMessageContent.text = message.content
         }
     }
 
